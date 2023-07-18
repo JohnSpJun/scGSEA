@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "scGSEA"
+version = "0.0.1"
+authors = [
+  { name="John Jun", email="johnjun094@cloud.ucsd.edu" },
+]
+maintainers = [
+    { name="John Jun", email="johnjun094@cloud.ucsd.edu" },
+]
+description = "Gene Set Enrichment Analysis (GSEA) method for elucidating biological pathway and process activation in single cell gene expression data"
+
+keywords = ["gsea", "ssgsea", "single cell"]
+
+dependencies = [
+  "httpx",
+  "gidgethub[httpx]>4.0.0",
+  "django>2.1; os_name != 'nt'",
+  "django>2.0; os_name == 'nt'",
+]
+
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pypa/sampleproject"
+"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
