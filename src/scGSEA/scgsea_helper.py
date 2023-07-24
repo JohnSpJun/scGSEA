@@ -191,8 +191,8 @@ def single_sample_gsea(
 
     return score
 
-## Alex's function for parallelization
-def run_ssgsea_parallel(
+## Code for scGSEA
+def run_scgsea(
     gene_x_sample,
     gene_sets,
     n_job = 1,
