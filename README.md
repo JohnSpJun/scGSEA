@@ -40,7 +40,7 @@
             <td align = "center"><i>scGSEA_scores</i></td>
         </tr>
         <tr>
-            <td colspan="1" rowspan="2" align="center">Cell Grouping Data * <br><i>Only use **one** of the two</i></td>
+            <td colspan="1" rowspan="2" align="center">Cell Grouping Data * <br><i>Only use <b>one</b> of the two</i></td>
             <td>metacell data label</td> 
             <td>Metadata label for cell grouping (metacell) information; clustering data</td>
             <td align = "center"><i>seurat_clusters</i></td>
