@@ -7,9 +7,9 @@
 **Contact**: [Forum Link](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/genepattern-help).  
 
 ## Parameters
-<style>
-{
-  font-size: 10px
+<style scoped>
+table {
+  font-size: 13px;
 }
 </style>
 <table>
@@ -56,11 +56,7 @@
         </tr>
     </tbody>
 </table>
-<style>
-{
-  font-size: 13px
-}
-</style>
+
 \*  Required
 
 ## Input Files
