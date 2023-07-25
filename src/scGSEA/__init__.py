@@ -1,2 +1,2 @@
-from scGSEA.preprocess import *
+from scGSEA.scgsea import *
 from scGSEA.scgsea_helper import *

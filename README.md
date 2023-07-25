@@ -1,55 +1,91 @@
 # scGSEA
 
-<!-- A brief text description of the module, usually one sentence in length. -->
-**Description**: scGSEA is an extension of ssGSEA designed to improve the assessment of pathway activity in single-cell data by addressing sparsity and ensuring stable enrichment scoring. This module is intended to be used subsequent to [Seurat.Clustering](https://github.com/genepattern/Seurat.Clustering) module and the user can supply the Seurat RDS file.
+**Description**: scGSEA is an extension of ssGSEA tailored for single-cell data analysis. It addresses the challenge of sparsity by employing a normalization method and scoring metric chosen to minimize any variability. By utilizing scGSEA, scientists can explore and interpret pathway activity and functional alterations within heterogeneous populations of cells.
 
-<!-- This field is for the author or creator of the module. If the algorithm of the module is from a published paper, this is usually the first or corresponding author from the paper. If the module algorithm is unpublished, this is usually the developer of the module itself. This field can simply be a name of a person or group. -->
 **Authors**: John Jun; UCSD - Mesirov Lab, UCSD
 
-<!--This field is used for responding to help requests for the module, and should be an email address or a link to a website with contact information or a help forum. -->
 **Contact**: [Forum Link](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/genepattern-help).  
 
-## Summary
-
-scGSEA is an extension of ssGSEA tailored for single-cell data analysis. It addresses the challenges of sparsity and unreliable enrichment scoring by employing specialized normalization methods and scoring metrics. By utilizing scGSEA, scientists can explore and interpret pathway activity and functional alterations within heterogeneous populations of cells, thereby advancing our understanding of complex biological systems.
-
 ## Parameters
-<!-- short description of the module parameters and their default values, as well as whether they are required -->
 
-| Name | Description <!--short description--> | Default Value |
----------|--------------|----------------
-| input_file * |  File to be read in RDS format |
-| chip_file  | Chip file used for conversion to gene symbols |
-| gene_set_database_file *  | Gene set data in GMT format |
-| output_file_name * | The basename to use for output file | scGSEA_scores
+<table>
+    <thead>
+        <tr>
+            <th>Parameter Group</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Default Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="1" rowspan="4" align="center">Input Files</td>
+            <td>input file *</td> 
+            <td>File containing raw counts or mRNA abundance estimates</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>gene set database file *</td>
+            <td>Gene sets in GMT format</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>chip file</td>
+            <td>Chip file used for conversion to gene symbols</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>output file name *</td>
+            <td>Basename to use for output file</td>
+            <td><i>scGSEA_scores</i></td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="2" align="center">Cell Grouping Data</td>
+            <td>metacell data label</td> 
+            <td>Metadata label for cell grouping (metacell) information; clustering data</td>
+            <td><i>seurat_clusters</i></td>
+        </tr>
+        <tr>
+            <td>metacell data file</td> 
+            <td>Metadata file for cell grouping (metacell) information; clustering data</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
-\*  required
+*  Required
 
 ## Input Files
-<!-- longer descriptions of the module input files. Include information about format and/or preprocessing...etc -->
 
-1. `input_file`
-    This is the Seurat RDS file from the Seurat.Clustering module.
-2. `chip_file`  
-    This parameter’s drop-down allows you to select CHIP files from the [Molecular Signatures Database (MSigDB)](https://www.gsea-msigdb.org/gsea/msigdb/index.jsp) on the GSEA website. This drop-down provides access to only the most current version of MSigDB. You can also upload your own gene set file(s) in [CHIP](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#CHIP:_Chip_file_format_.28.2A.chip.29) format.
-4. `gene_set_database_file`
-    * This parameter’s drop-down allows you to select gene sets from the [Molecular Signatures Database (MSigDB)](https://www.gsea-msigdb.org/gsea/msigdb/index.jsp) on the GSEA website. This drop-down provides access to only the most current version of MSigDB. You can also upload your own gene set file(s) in [GMT](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#GMT:_Gene_Matrix_Transposed_file_format_.28.2A.gmt.29) format.
+1. `input file`  
+    This is a file containing unnormalized gene expression data in raw read counts or estimated RNA abundance. The scGSEA module supports multiple input file formats including Seurat RDS, H5seurat, H5ad formats as well as 10x Market Exchange (MEX) and HDF5 (h5) formats. For a Seurat object, the $RNA@counts slot will be used. For an AnnData object, the raw.X slot will be used. 
+   * If you come across the following message in the `stderr.txt` file, please verify that the input file contains unnormalized raw counts data.
+    &nbsp;<pre><code>The raw counts matrix was not composed of integer values. This may represent an issue with the processing pipeline. Please be advised...</code></pre>
+   * If you have used `kallisto` or `salmon.alevin` for alignment, please disregard the message about the raw counts data not being in integer format; the aforementioned tools generate estimated RNA abundances, which may consist of non-integer count values.
+   * For 10x MEX file format, please compress the folder containing the three files (barcodes.tsv, matrix.mtx, features.tsv) and supply the `.zip` file.
+2. `gene set database file`
+    * This parameter’s drop-down allows you to select gene sets from the [Molecular Signatures Database (MSigDB)](https://www.gsea-msigdb.org/gsea/msigdb/index.jsp) on the GSEA website. This drop-down provides access to only the most current (2023) version of MSigDB. You can also upload your own gene set file(s) in [GMT](https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#GMT:_Gene_Matrix_Transposed_file_format_.28.2A.gmt.29) format.
     * If you want to use files from an earlier version of MSigDB you will need to download them from the archived releases on the [website](https://www.gsea-msigdb.org/gsea/downloads.jsp).
-5. `output_file_name`  
-    The prefix used for the name of the output GCT and CSV file. If unspecified, output prefix will be set to `scGSEA_scores`. The output CSV and GCT files will contain the projection of input dataset onto a space of gene set enrichments scores.
-6. `cluster_data_label`  
-    The name of the metadata label within the input Seurat object. This label will be used to access the annotations utilized for aggregating cells. The default value for this parameter is `seurat_clusters`, which is the metadata label for cluster annotations generated upon running Seurat.Clustering module. Use the default value when using the RDS file generated from the [Seurat.Clustering](https://github.com/genepattern/Seurat.Clustering) module.
+3. `chip file`  
+    This parameter’s drop-down allows you to select CHIP files from the [Molecular Signatures Database (MSigDB)](https://www.gsea-msigdb.org/gsea/msigdb/index.jsp) on the GSEA website. This drop-down provides access to only the most current version (2023) of MSigDB.
+
+4. `output file name`  
+    The prefix used for the name of the output GCT and CSV file. The default output prefix is <i>scGSEA_scores</i>. The output CSV and GCT files will contain a gene set x metacell matrix of enrichments scores.
+
+### Cell Grouping Data
+5. `metacell data label`  
+    The name of the metadata label for cell grouping information within the input Seurat/AnnData object. This label will be used to access the cell grouping information utilized for aggregating cells to create metacells. The default value for this parameter is <i>seurat_clusters</i>, which is the metadata label for the slot that stores cell-to-cluster mapping generated by the Genepattern Seurat.Clustering module. Use the default value when using the RDS file generated by the [Seurat.Clustering](https://github.com/genepattern/Seurat.Clustering) module. Otherwise, provide the appropriate metadata label for the slot that stores cell grouping information.
+6. `metacell data file`  
+    If your input file is `h5` or `10x MEX` format, a separate cell grouping data file (tab-delimited .txt file) must be supplied here. The first column, "Name", would have cell names and the second column, "Metacell", would have metacell (cell group) names. The grouping information in this file is used to aggregate cells prior to computing scGSEA scores. Therefore, if you have `h5` or `10x MEX` formatted files and do not have metacell data file, please use the GenePattern [ScanpyUtilities](https://github.com/genepattern/ScanpyUtilities) module or the GenePattern Seurat Suite ([Seurat.QC](https://github.com/genepattern/Seurat.QC) > [Seurat.Preprocess](https://github.com/genepattern/Seurat.Preprocess) > [Seurat.Clustering](https://github.com/genepattern/Seurat.Clustering)) to compute clusters prior to performing scGSEA.
     
 ## Output Files
 <!-- list and describe any files output by the module -->
 
 1. `<output_file_name>.csv`   
-    This is a gene set by cell cluster data consisted of scGSEA scores. 
+    This is a gene set x metacell matrix consisted of scGSEA scores. 
 2. `<output_file_name>.gct`   
-    This is a gene set by cell cluster data consisted of scGSEA scores. The HeatmapViewer module can accept this file as input for generating heatmap visualizations.
-3. `cluster_expression.csv`   
-    This is a gene by cell cluster data consisted of normalized gene expression level. 
-4. `stdout.txt`  
-    This is standard output from the script.
+    This is a gene set x metacell matrix consisted of scGSEA scores. The [HeatmapViewer module](https://github.com/genepattern/HeatMapViewer) can accept this file as input for generating heatmap visualizations.
+3. `metacell_expression.csv`   
+    This is a gene by metacell matrix consisted of normalized gene expression. 
 
 For more details, please refer to the [full documentation](https://github.com/genepattern/scGSEA/blob/develop/docs/documentation.md).
