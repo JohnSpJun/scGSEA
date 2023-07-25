@@ -37,13 +37,13 @@
         <tr>
             <td>output file name *</td>
             <td>Basename to use for output file</td>
-            <td><i>scGSEA_scores</i></td>
+            <td align = "center"><i>scGSEA_scores</i></td>
         </tr>
         <tr>
             <td colspan="1" rowspan="2" align="center">Cell Grouping Data *</td>
             <td>metacell data label</td> 
             <td>Metadata label for cell grouping (metacell) information; clustering data</td>
-            <td><i>seurat_clusters</i></td>
+            <td align = "center"><i>seurat_clusters</i></td>
         </tr>
         <tr>
             <td>metacell data file</td> 
@@ -54,7 +54,7 @@
             <td align="center"> Multi-threading</td>
             <td>n_thread</td>
             <td>Number of CPUs to utilize for parallel computing</td>
-            <td>3</td>
+            <td align="center">3</td>
     </tbody>
 </table>
 
