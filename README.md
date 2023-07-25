@@ -7,11 +7,7 @@
 **Contact**: [Forum Link](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!forum/genepattern-help).  
 
 ## Parameters
-<style scoped>
-table {
-  font-size: 13px;
-}
-</style>
+
 <table>
     <thead>
         <tr>
