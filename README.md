@@ -20,33 +20,33 @@
     <tbody>
         <tr>
             <td colspan="1" rowspan="4" align="center">Input Files</td>
-            <td>input file *</td> 
+            <td>gex_file *</td> 
             <td>File containing raw counts or mRNA abundance estimates</td>
             <td></td>
         </tr>
         <tr>
-            <td>gene set database file *</td>
+            <td>gene_set_database_file *</td>
             <td>Gene sets in GMT format</td>
             <td></td>
         </tr>
         <tr>
-            <td>chip file</td>
+            <td>chip_file</td>
             <td>Chip file used for conversion to gene symbols</td>
             <td></td>
         </tr>
         <tr>
-            <td>output file name *</td>
+            <td>output_file_name *</td>
             <td>Basename to use for output file</td>
             <td align = "center"><i>scGSEA_scores</i></td>
         </tr>
         <tr>
             <td colspan="1" rowspan="2" align="center">Cell Grouping Data * <br>(<i>Only use <b>one</b> of the two</i>)</td>
-            <td>metacell data label</td> 
+            <td>metacell_data_label</td> 
             <td>Metadata label for cell grouping (metacell) information; clustering data</td>
             <td align = "center"><i>seurat_clusters</i></td>
         </tr>
         <tr>
-            <td>metacell data file</td> 
+            <td>metacell_data_file</td> 
             <td>Metadata file for cell grouping (metacell) information; clustering data</td>
             <td></td>
         </tr>
@@ -62,7 +62,7 @@
 
 ## Input Files
 
-1. `input file`  
+1. `gex_file`  
     This is a file containing unnormalized gene expression data in raw read counts or estimated RNA abundance. The scGSEA module supports multiple input file formats including Seurat RDS, H5seurat, H5ad formats as well as 10x Market Exchange (MEX) and HDF5 (h5) formats. For a Seurat object, the $RNA@counts slot will be used. For an AnnData object, the raw.X slot will be used. 
    * If you come across the following message in the `stderr.txt` file, please verify that the input file contains unnormalized raw counts data.
     &nbsp;<pre><code>The raw counts matrix was not composed of integer values. This may represent an issue with the processing pipeline. Please be advised...</code></pre>
