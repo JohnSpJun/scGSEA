@@ -85,7 +85,7 @@
 
 ### Multi-Threading
 7. `n_cpu`  
-    The number of CPUs to utilize for parallel computing. scGSEA package parallelizes the computation of enrichment scores through dividing the computation into `n_thread` number of subprocesses. The default value for this parameter is **3**. 
+    The number of CPUs to utilize for parallel computing. scGSEA package parallelizes the computation of enrichment scores through dividing the computation into `n_cpu` number of subprocesses. The default value for this parameter is **3**. 
 
 ## Output Files
 <!-- list and describe any files output by the module -->
