@@ -53,7 +53,7 @@
     </tbody>
 </table>
 
-*  Required
+\*  Required
 
 ## Input Files
 
